@@ -1,6 +1,6 @@
-from flask import Flask, jsonify, make_response
+from flask import Flask, jsonify, make_response, Response
 from flask_restful import Api, Resource, reqparse
-
+import json
 app = Flask(__name__)
 api = Api(app)
 
@@ -133,12 +133,12 @@ ai_quotes = [
 class Quote(Resource):
     def get(self, id=0):
         if id == 0:
-            return jsonify(ai_quotes[0]), 200
+            return Response(json.dumps(ai_quotes[0]), status=200, mimetype='application/json')
         for quote in ai_quotes:
             if quote["id"] == id:
-                return jsonify(quote), 200
+                return Response(json.dumps(quote), status=200, mimetype='application/json')
         error_message = {"error": "Quote not found"}
-        return jsonify(error_message), 404
+        return Response(json.dumps(error_message), status=404, mimetype='application/json')
 
 
 

@@ -138,7 +138,7 @@ class Quote(Resource):
             if quote["id"] == id:
                 return jsonify(quote), 200
         error_message = {"error": "Quote not found"}
-        return make_response(jsonify(error_message), 404)
+        return jsonify(error_message), 404
 
 
 

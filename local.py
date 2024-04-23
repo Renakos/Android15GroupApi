@@ -134,11 +134,12 @@ ai_quotes = [
 class Quote(Resource):
     def get(self, id=0):
         if id == 0:
-            return ai_quotes, 200
+            return ai_quotes[0], 200
         for quote in ai_quotes:
             if quote["id"] == id:
                 return quote, 200
         return "Quote not found", 404
+
 
 
 def post(self, id):
@@ -158,7 +159,7 @@ def post(self, id):
     return quote, 201
 
 
-def put(self, id):
+def put(id):
     parser = reqparse.RequestParser()
     parser.add_argument("author")
     parser.add_argument("quote")
@@ -177,6 +178,8 @@ def put(self, id):
 
     ai_quotes.append(quote)
     return quote, 201
+
+
 
 
 def delete(self, id):
